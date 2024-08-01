@@ -1,7 +1,10 @@
+import { Login } from "./page/login";
+
 function App() {
   return (
     <>
-      <h2>Tech Bar Assignment</h2>
+      {/* <h2>Tech Bar Assignment</h2> */}
+      <Login />
     </>
   );
 }
