@@ -1,18 +1,16 @@
-import { Login } from "./page/login";
-import { Provider } from 'react-redux';
-import { initializeStore } from './store';
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { authRoutes } from "./routes";
 
-const store = initializeStore();
-
-function App() {
+function App(): React.ReactNode {
   return (
     <>
-       <Provider store={store}>
- 
-      {/* <h2>Tech Bar Assignment</h2> */}
-      <Login />
-      </Provider>
-
+      <BrowserRouter>
+        <Routes>
+          {authRoutes.map((route, idx) => (
+            <Route key={idx} path={route.path} element={route.component} />
+          ))}
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
