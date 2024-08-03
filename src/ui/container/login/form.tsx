@@ -1,13 +1,9 @@
 import React from "react";
 import { Form, useFormik } from "formik";
 import * as Yup from "yup";
-import { Button } from "../../../component/button";
-import { Input } from "../../../component/input";
-import FormikBase from "../../formik";
-// import { Button } from "@/ui/component/button";
-// import { Input } from "@/ui/component/input";
-// import FormikBase from "@/ui/container/formik";
-
+import { Button } from "../../component/button";
+import { Input } from "../../component/input";
+import FormikBase from "../formik";
 
 
 const validationSchema = Yup.object({
@@ -42,8 +38,6 @@ const LoginForm = ({ onCreate, handleSubmit }: any) => {
           <>
             <Form>
               <Input
-                labelCss={{ color: "white" }}
-                customStyle={{ color: "white" }}
                 label="Email"
                 name="email"
                 type="email"
@@ -54,8 +48,6 @@ const LoginForm = ({ onCreate, handleSubmit }: any) => {
               />
 
               <Input
-                labelCss={{ color: "white" }}
-                customStyle={{ color: "white" }}
                 label="Password"
                 name="password"
                 placeholder="Enter Password"

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { initializeStore } from "./store";
+import "./theme/scss/index.scss";
 
 const store = initializeStore();
 ReactDOM.createRoot(document.getElementById("root")!).render(

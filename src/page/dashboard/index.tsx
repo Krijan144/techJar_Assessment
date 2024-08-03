@@ -1,7 +1,16 @@
-import React from "react";
+import { styled } from "../../theme/stitches";
+import Sidebar from "../../ui/container/sidebar";
 
-const Dashboard = () => {
-  return <div>Dashboard</div>;
+const DashboardTemplate = () => {
+  return (
+    <div>
+      <Sidebar />
+      <StyledContainer></StyledContainer>
+    </div>
+  );
 };
 
-export default Dashboard;
+export default DashboardTemplate;
+const StyledContainer = styled("div", {
+  padding: "1rem",
+});

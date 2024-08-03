@@ -11,7 +11,7 @@ export const { styled, getCssText, keyframes, globalCss }: any = createStitches(
     },
     theme: {
       colors: {
-        primary: "#1F4782",
+        primary: "#008C82",
         secondary: "#eb501e",
         gray: "#c7c7c7",
         white: "#ffffff",
