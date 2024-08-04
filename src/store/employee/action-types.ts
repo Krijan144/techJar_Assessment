@@ -1,0 +1,24 @@
+export const SET_IS_LOADING = "@@employee/SET_IS_LOADING";
+
+export const SET_IS_SUBMITTING = "@@employee/SET_IS_SUBMITTING";
+
+export const SET_EMPLOYEE_DATA = "@@employee/SET_EMPLOYEE_DATA";
+export const SET_EMPLOYEES_DATA = "@@employee/SET_EMPLOYEES_DATA";
+export const SET_UNIQUEEMPLOYEES_DATA = "@@employee/SET_UNIQUEEMPLOYEES_DATA";
+
+export const SET_EMPLOYEES_METADATA = "@@employee/SET_EMPLOYEES_METADATA";
+
+export const SET_SEARCHED_EMPLOYEES_DATA =
+  "@@employee/SET_SEARCHED_EMPLOYEES_DATA";
+export const RESET_SEARCHED_EMPLOYEES_DATA =
+  "@@employee/RESET_SEARCHED_EMPLOYEES_DATA";
+
+export const CREATE_EMPLOYEE_DATA = "@@employee/CREATE_EMPLOYEE_DATA";
+
+export const REMOVE_EMPLOYEE_DATA = "@@employee/REMOVE_EMPLOYEE_DATA";
+
+export const UPDATE_EMPLOYEE_DATA = "@@employee/UPDATE_EMPLOYEE_DATA";
+
+export const EMPLOYEES_IS_SUBMITTING = "@@employee/EMPLOYEES_IS_SUBMITTING";
+
+export const EMPLOYEES_IS_UPDATING = "@@employee/EMPLOYEES_IS_UPDATING";

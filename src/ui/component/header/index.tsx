@@ -1,5 +1,4 @@
 import { styled } from "@stitches/react";
-import React from "react";
 interface HeaderInterface {
   label: string;
   css?: any;
@@ -12,6 +11,7 @@ export default Header;
 const StyledHeader = styled("h4", {
   color: "$primary",
   fontSize: "$large",
-  fontWeight: "bold",
+  // fontWeight: "bold",
+  padding: "1rem",
+  paddingBottom: "0",
 });
-styled;

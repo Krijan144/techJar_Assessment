@@ -1,5 +1,4 @@
-import { styled } from "@/theme/stitches";
-import React from "react";
+import { styled } from "../../../theme/stitches";
 
 const Table = ({ headers, children, columnStyle }: any) => {
   return (
@@ -24,12 +23,10 @@ const StyledData = styled("div", {
   borderBottom: "1px dashed #eff2f5",
   paddingTop: "1rem",
   paddingBottom: "1rem",
-  height: "calc(100vh - 340px)",
   overflow: "auto",
 });
 const StyledTable = styled("div", {
-  padding: "2rem",
-  width: "100%",
+  padding: "1rem",
   borderRadius: 10,
 });
 const Headers = styled("div", {
@@ -40,6 +37,5 @@ const Headers = styled("div", {
   paddingBottom: "1rem",
 });
 const Header = styled("h4", {
-  fontSize: "$large",
   color: "#A1A5B7",
 });

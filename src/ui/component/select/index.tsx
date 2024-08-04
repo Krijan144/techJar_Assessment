@@ -9,12 +9,8 @@ import {
 } from "@radix-ui/react-icons";
 import { LabelRoot } from "../input";
 
-import { setValue } from "../../../store/input/slice";
-
-import { useDispatch } from "react-redux";
-
 interface ItemProp {
-  _id: string;
+  _id: number;
   name: string;
   value: string;
 }
@@ -30,7 +26,6 @@ interface SelectProp {
 export const Dropdown = ({
   data,
   label,
-  name,
   labelShow = true,
   handleChange,
   changeText = true,
@@ -46,7 +41,7 @@ export const Dropdown = ({
         </>
       )}
 
-      <Select.Root onValueChange={(e) => handleChange(e)} value="">
+      <Select.Root onValueChange={(e) => handleChange(e)} value={label}>
         <SelectTrigger>
           {changeText ? (
             <Select.Value placeholder={label} />
@@ -100,14 +95,14 @@ const SelectTrigger = styled(Select.SelectTrigger, {
   height: 35,
   gap: 5,
   backgroundColor: "white",
-  color: violet.violet11,
+  color: "$primary",
   boxShadow: `0 2px 10px ${blackA.blackA7}`,
   "&:hover": { backgroundColor: mauve.mauve3 },
-  "&[data-placeholder]": { color: violet.violet9 },
+  "&[data-placeholder]": { color: "$primary" },
 });
 
 const SelectIcon = styled(Select.SelectIcon, {
-  color: violet.violet11,
+  color: "$primary",
 });
 
 const SelectContent = styled(Select.Content, {
@@ -138,7 +133,7 @@ const SelectItem = React.forwardRef(
 const StyledItem = styled(Select.Item, {
   fontSize: 13,
   lineHeight: 1,
-  color: violet.violet11,
+  color: "$primary",
   borderRadius: 3,
   display: "flex",
   alignItems: "center",
@@ -154,8 +149,8 @@ const StyledItem = styled(Select.Item, {
 
   "&[data-highlighted]": {
     outline: "none",
-    backgroundColor: violet.violet9,
-    color: violet.violet1,
+    backgroundColor: "$primary",
+    color: "$white",
   },
 });
 

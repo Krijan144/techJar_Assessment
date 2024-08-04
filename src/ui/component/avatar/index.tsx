@@ -1,7 +1,7 @@
 import React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { styled } from "../../../theme/stitches";
-import { violet, blackA } from "@radix-ui/colors";
+import { blackA } from "@radix-ui/colors";
 import { shortName } from "../../../utils/index";
 import Tooltip from "../tooltip";
 
@@ -74,8 +74,8 @@ const AvatarRoot = styled(AvatarPrimitive.Root, {
         height: 30,
       },
       md: {
-        width: 45,
-        height: 45,
+        width: 35,
+        height: 35,
       },
     },
   },

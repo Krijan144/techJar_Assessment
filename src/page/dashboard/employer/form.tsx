@@ -1,9 +1,8 @@
-import React from "react";
-import { Form, useFormik } from "formik";
+import { Form } from "formik";
 import * as Yup from "yup";
-import { Button } from "@/ui/component/button";
-import { Input } from "@/ui/component/input";
-import FormikBase from "@/ui/container/formik";
+import { Input } from "../../../ui/component/input";
+import FormikBase from "../../../ui/container/formik";
+import { Button } from "../../../ui/component/button";
 
 const validationSchema = Yup.object({
   first_name: Yup.string().required("First Name is required"),

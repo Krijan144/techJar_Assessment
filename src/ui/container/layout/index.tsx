@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import Logo from "../../../../public/logo.png";
-import Hamburger from "../../../../public/hamburger.png";
+import React, { useState, ReactNode } from "react";
+
+import Logo from "../../../../assets/logo.png";
+import Hamburger from "../../../../assets/hamburger.png";
+import LogoMob from "../../../../assets/logoMob.png";
 
 import { MdOutlineDashboard } from "react-icons/md";
-import { FiUsers } from "react-icons/fi";
 import AvatarDemo from "../../component/avatar";
 import { styled } from "../../../theme/stitches";
 
-interface ItemProp {
-  name: string;
-  path: string;
+interface LayoutProps {
+  children: ReactNode;
 }
+
 const navData = [
   {
     name: "Dashboard",
@@ -18,22 +19,16 @@ const navData = [
     icon: <MdOutlineDashboard />,
   },
 ];
-const Sidebar = ({ children }: any) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [click, setClick] = useState(false);
 
   return (
     <Flex>
-      <StyledSidebar variant={click ? "secondary" : "primary"}>
+      <StyledLayout variant={click ? "secondary" : "primary"}>
         <StyledDiv>
-          <img
-            src={Logo}
-            width={click ? 40 : 130}
-            height={click ? 20 : 70}
-            alt=""
-          />
-          <br />
-          <br />
-
+          <StyledLogo variant={click ? "mobile" : "web"} alt="">
+            <img src={click ? LogoMob : Logo} />
+          </StyledLogo>
           {navData?.map((item) => {
             return (
               <StyledItem>
@@ -51,7 +46,7 @@ const Sidebar = ({ children }: any) => {
             );
           })}
         </StyledDiv>
-      </StyledSidebar>
+      </StyledLayout>
       <StyledParent>
         <StyledTopBar>
           <img
@@ -64,7 +59,7 @@ const Sidebar = ({ children }: any) => {
             height={15}
             alt=""
           />
-          <AvatarDemo fallbackText="John Doe" />
+          <AvatarDemo fallbackText="John Doe" variant="md" />
         </StyledTopBar>
         <StyledContent>{children}</StyledContent>
       </StyledParent>
@@ -85,7 +80,24 @@ const StyledItem = styled("div", {
     transform: "scale(0.95)",
   },
 });
-const StyledImage = styled("img", {});
+const StyledLogo = styled("div", {
+  width: 100,
+  objectFit: "contain",
+  padding: "18px 0 15px 15px",
+  img: {
+    width: "100%",
+  },
+  variants: {
+    variant: {
+      mobile: {
+        width: 25,
+      },
+      web: {
+        width: 120,
+      },
+    },
+  },
+});
 
 const StyledParent = styled("div", {
   width: "100%",
@@ -100,12 +112,13 @@ const StyledDiv = styled("div", {
 });
 
 const StyledTopBar = styled("div", {
-  boxShadow: "0px 0px 2px 0px #gray",
-  height: 100,
+  height: 60,
   alignItems: "center",
   display: "flex",
   background: "$white",
+  paddingRight: 10,
   justifyContent: "space-between",
+  borderBottom: "2px solid #f2f2f2",
   img: {
     transition: "0.3s ease-in",
     cursor: "pointer",
@@ -113,26 +126,17 @@ const StyledTopBar = styled("div", {
 });
 
 const StyledContent = styled("div", {
-  padding: "1.5rem",
-  background: "#F2F5F8",
+  minHeight: "95vh",
 });
-const StyledSidebar = styled("div", {
-  height: "100vh",
-  // position: "fixed",
+const StyledLayout = styled("div", {
   textAlign: "center",
-  display: "flex",
-  justifyContent: "space-between",
   transition: "0.3s ease-in",
   borderRight: "2px solid #f2f2f2",
-  // left: 0,
-  // top: 0,
   color: "$primary",
   background: "$white",
   img: {
     transition: "0.3s ease-in",
     cursor: "pointer",
-    objectFit: "contain",
-    padding: 15,
   },
   variants: {
     variant: {
@@ -145,4 +149,4 @@ const StyledSidebar = styled("div", {
     },
   },
 });
-export default Sidebar;
+export default Layout;

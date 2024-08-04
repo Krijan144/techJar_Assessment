@@ -1,28 +1,23 @@
-import { useState } from "react";
-import { setValue } from "@/store/input/slice";
-import {
-  useCreateEmployerMutation,
-  useDeleteEmployerMutation,
-  useUpdateEmployerMutation,
-} from "@/store/services";
-import { styled } from "@/theme/stitches";
-import DialogDemo from "@/ui/component/dialog";
-import Header from "@/ui/component/header";
-import Dropdown from "@/ui/component/select";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Table from "@/ui/container/table";
-import { useGetEmployer } from "@/store/employer";
+import { useEffect, useState } from "react";
+import DialogDemo from "../../..//ui/component/dialog";
+import Header from "../../..//ui/component/header";
+import Dropdown from "../../../ui/component/select";
 
 import EmployerForm from "./form";
-import { Button } from "@/ui/component/button";
+// import { Button } from "../../../component/button";
+// import { styled } from "../../../../theme/stitches";
+import Table from "../../../ui/container/table";
+import { styled } from "../../../theme/stitches";
+import { Button } from "../../../ui/component/button";
+import { employerData } from "../data";
+import { connect } from "react-redux";
+import { AppState } from "../../../store/reducer";
 import {
-  deleteEmployerData,
-  setNewEmployerData,
-  updateEmployerData,
-} from "@/store/employer/slice";
-import { toast } from "react-toastify";
-import ToastContainer from "@/ui/component/toast";
+  createEmployee,
+  deleteEmployee,
+  fetchEmployees,
+  updateEmployee,
+} from "../../../store/employee/actions";
 
 const actionData = [
   {
@@ -37,79 +32,22 @@ const actionData = [
   },
 ];
 
-const EmployerTemplate = () => {
-  const dispatch = useDispatch();
+const Employer = ({
+  isLoading,
+  employees,
+  fetchEmployees,
+  createEmployee,
+  deleteEmployee,
+  updateEmployee,
+}: any) => {
   const [show, setShow] = useState<string>("");
   const [selectedData, setSelectedData] = useState();
   const [dialogTitle, setDialogTitle] = useState<string>("");
 
-  useGetEmployer();
+  useEffect(() => {
+    fetchEmployees({ data: employerData });
+  }, []);
 
-  //mutation
-  const [createEmployer, { isLoading: createLoading, isError: createError }] =
-    useCreateEmployerMutation();
-  const [updateEmployer, { isLoading: updateLoading, isError: updateError }] =
-    useUpdateEmployerMutation();
-  const [deleteEmployer, { isLoading: deleteLoading, isError: deleteError }] =
-    useDeleteEmployerMutation();
-  //selectors
-  const employerData = useSelector((state: any) => state.employer.data);
-  const handleSubmit = (e: any) => {
-    createEmployer(e)
-      .unwrap()
-      .then((res) => {
-        if (res.msg === "employer created") {
-          dispatch(setNewEmployerData(res.result));
-          toast.success("Employer Created Successfully");
-          setShow("");
-        } else {
-          toast.warning(res.msg);
-        }
-      })
-      .catch((err) => {
-        toast.warn(err.data.msg);
-
-        console.log(err, "error");
-      });
-  };
-  const handleEdit = (e: any) => {
-    updateEmployer({ value: e, id: selectedData && selectedData?._id })
-      .unwrap()
-      .then((res) => {
-        if (res.msg === "employer updates") {
-          dispatch(updateEmployerData(res.result));
-          toast.success("Employer Created Successfully");
-          setShow("");
-        } else {
-          toast.warning(res.msg);
-        }
-      })
-      .catch((err) => {
-        toast.warn(err.data.msg);
-
-        console.log(err, "error");
-      });
-  };
-  const handleDelete = (e: string) => {
-    deleteEmployer({ id: e })
-      .unwrap()
-      .then((res) => {
-        if (res.msg === "employer deleted") {
-          dispatch(deleteEmployerData(e));
-          dispatch(updateEmployerData(e));
-          toast.success("Employer Deleted Successfully");
-          setShow("");
-        } else {
-          toast.warning(res.msg);
-        }
-      })
-      .catch((err) => {
-        toast.warn(err.data.msg);
-        console.log({ err });
-      });
-
-    setShow("");
-  };
   return (
     <>
       <StyledMain>
@@ -117,7 +55,7 @@ const EmployerTemplate = () => {
           customStyle={{ float: "right" }}
           label="Create Employer"
           onClick={() => {
-            setSelectedData();
+            setSelectedData(undefined);
             setDialogTitle("Create Employer");
             setShow("form");
           }}
@@ -133,10 +71,12 @@ const EmployerTemplate = () => {
             <EmployerForm
               formData={selectedData}
               onCreate={(e: any) => {
-                handleSubmit(e);
+                console.log(e);
+
+                createEmployee({ data: e });
               }}
               onEdit={(e: any) => {
-                handleEdit(e);
+                updateEmployee({ data: e });
               }}
             />
           )}
@@ -148,7 +88,8 @@ const EmployerTemplate = () => {
                 label="Yes"
                 variant="secondary"
                 onClick={() => {
-                  handleDelete(selectedData._id);
+                  deleteEmployee({ data: selectedData.id });
+                  setShow("");
                 }}
               ></Button>
               <Button
@@ -160,12 +101,12 @@ const EmployerTemplate = () => {
             </Flex>
           )}
         </DialogDemo>
-        {employerData.length && (
+        {employees.length && (
           <Table
             headers={["Email", "Status", "Action"]}
             columnStyle={{ gridTemplateColumns: "2fr 1fr 1fr" }}
           >
-            {employerData.map((item: any) => {
+            {employees.map((item: any) => {
               return (
                 <>
                   <StyledP>{item.email}</StyledP>
@@ -203,9 +144,25 @@ const EmployerTemplate = () => {
   );
 };
 
-export default EmployerTemplate;
+const mapStateToProps = ({
+  employeeState: { isLoading, employees },
+}: AppState) => ({
+  isLoading,
+  employees,
+});
+
+const mapDispatchToProps = {
+  fetchEmployees,
+  createEmployee,
+  deleteEmployee,
+  updateEmployee,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(Employer);
+
 const StyledP = styled("span", {
-  fontSize: "$normal",
   paddingTop: "1rem",
   paddingBottom: "1rem",
 });
@@ -219,7 +176,6 @@ const StyledMain = styled("div", {
 export const StyledTrigger = styled("div", {
   padding: "1rem",
   background: "$primary",
-  width: "fit-content",
   color: "$white",
   borderRadius: "8px",
   transition: "0.2s",
