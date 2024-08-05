@@ -14,4 +14,8 @@ const StyledHeader = styled("h4", {
   // fontWeight: "bold",
   padding: "1rem",
   paddingBottom: "0",
+  "@sm2": {
+    fontSize: 14,
+    padding: "0.5rem",
+  },
 });

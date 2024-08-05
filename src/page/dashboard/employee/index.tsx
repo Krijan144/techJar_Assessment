@@ -18,6 +18,7 @@ import {
   updateEmployee,
 } from "../../../store/employee/actions";
 import { setNotification } from "../../../store/app/actions";
+import SkeletonLoader from "../../../ui/component/skeleton";
 
 const actionData = [
   {
@@ -74,7 +75,7 @@ const Employee = ({
           }}
         ></Button>
         {isLoading ? (
-          <></>
+          <SkeletonLoader style={{ height: "80vh" }} />
         ) : (
           <>
             <DialogDemo

@@ -3,7 +3,18 @@ import { Bar } from "react-chartjs-2";
 import { styled } from "../../../../theme/stitches";
 import Header from "../../header";
 
-const Bars = ({ name, label, datas }) => {
+type DataType = {
+  labels: string[];
+  data: number[];
+  colors?: string[];
+};
+
+export type ChartType = {
+  name: string;
+  label: string;
+  datas: DataType;
+};
+const Bars = ({ name, label, datas }: ChartType) => {
   const data = {
     labels: datas.labels,
     datasets: [
@@ -16,23 +27,11 @@ const Bars = ({ name, label, datas }) => {
     ],
   };
 
-  const options = {
-    maintainAspectRatio: true,
-    layout: {
-      padding: {
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 20,
-      },
-    },
-  };
-
   return (
     <>
       <Chartss>
         <Header label={name} />
-        <Bar data={data} options={options} />
+        <Bar data={data} />
       </Chartss>
     </>
   );
@@ -59,8 +58,13 @@ export const Chartss = styled("div", {
     padding: "1rem",
     boxShadow: "rgba(99, 99, 99, 0.15) 0px 1px 6px 0",
   },
+
   "@media (max-width: 512px)": {
-    // width: "100%",
+    width: "90%",
     overflowX: "auto",
+  },
+
+  "@sm2": {
+    width: "15.5rem",
   },
 });

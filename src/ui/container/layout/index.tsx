@@ -9,6 +9,7 @@ import AvatarDemo from "../../component/avatar";
 import { styled } from "../../../theme/stitches";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
@@ -29,6 +30,8 @@ const navData = [
   },
 ];
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const location = useLocation();
+
   const [click, setClick] = useState<boolean>(false);
   const [active, setActive] = useState<number>(1);
   return (
@@ -49,7 +52,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   setActive(item.id);
                 }}
               >
-                <StyledItem variant={active === item.id && "active"}>
+                <StyledItem
+                  variant={location.pathname === item.path && "active"}
+                >
                   {item.icon}
                   {!click && <StyledN>{item.name}</StyledN>}
                 </StyledItem>

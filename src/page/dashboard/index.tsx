@@ -32,7 +32,7 @@ const DashboardTemplate = ({ isLoading }: dashboardType) => {
               ))}
             </CardContainer>
             <Header label="Data Analytics" css={{ paddingLeft: 0 }} />
-            <div style={{ minWidth: "20rem" }}>
+            <div>
               <StyledChart>
                 <Doughnut
                   name={"Total Revenue"}
@@ -77,6 +77,9 @@ export default connector(DashboardTemplate);
 const StyledContainer = styled("div", {
   padding: "2rem",
   background: "rgb(252 252 252)",
+  "@sm2": {
+    padding: "1rem",
+  },
 });
 
 const CardContainer = styled("div", {

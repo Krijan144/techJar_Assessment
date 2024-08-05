@@ -1,8 +1,8 @@
 import { Line } from "react-chartjs-2";
-import { Chartss } from "../bar";
+import { Chartss, ChartType } from "../bar";
 import Header from "../../header";
 
-const Lines = ({ name, label, datas }) => {
+const Lines = ({ name, label, datas }: ChartType) => {
   const data = {
     labels: datas.labels,
     datasets: [
@@ -15,23 +15,12 @@ const Lines = ({ name, label, datas }) => {
       },
     ],
   };
-  const options = {
-    maintainAspectRatio: true,
-    layout: {
-      padding: {
-        top: 40,
-        right: 50,
-        bottom: 20,
-        left: 50,
-      },
-    },
-  };
 
   return (
     <>
       <Chartss>
         <Header label={name}></Header>
-        <Line data={data} options={options} />
+        <Line data={data} />
       </Chartss>
     </>
   );
