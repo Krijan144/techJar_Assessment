@@ -4,17 +4,18 @@ export const shortName = (name: string) => {
   return firstLetters?.join("");
 };
 
-export const updateData = (data, action) => {
-  // Find the index of the employer with the matching _id
+export const updateData = (data: [], action: any) => {
+  // Find the index of the employee with the matching _id
   const index = data.findIndex((item: any) => item.id === action.payload.id);
   if (index !== -1) {
-    // Replace the employer at the found index with the updated data
+    // Replace the employee at the found index with the updated data
     data[index] = action.payload;
   }
+  return data;
 };
 
-export const deleteData = (data, action) => {
-  // Filter out the employer with the matching _id
+export const deleteData = (data: [], action: any) => {
+  // Filter out the employee with the matching _id
 
   return data.filter((item: any) => item.id !== action.payload);
 };

@@ -91,7 +91,8 @@ export const fetchEmployees =
 
       return false;
     } catch (error) {
-      error.response && dispatch(setErrorMessage(error));
+      console.log(error);
+
       dispatch(setIsLoading(false));
       return false;
     }
@@ -108,7 +109,8 @@ export const createEmployee =
 
       return false;
     } catch (error) {
-      error.response && dispatch(setErrorMessage(error));
+      console.log(error);
+
       dispatch(setIsLoading(false));
       return false;
     }
@@ -124,7 +126,8 @@ export const updateEmployee =
 
       return false;
     } catch (error) {
-      error.response && dispatch(setErrorMessage(error));
+      console.log(error);
+
       dispatch(setIsLoading(false));
       return false;
     }
@@ -140,7 +143,8 @@ export const deleteEmployee =
 
       return false;
     } catch (error) {
-      error.response && dispatch(setErrorMessage(error));
+      console.log(error);
+
       dispatch(setIsLoading(false));
       return false;
     }

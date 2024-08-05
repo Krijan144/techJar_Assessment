@@ -7,6 +7,8 @@ import LogoMob from "../../../../assets/logoMob.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import AvatarDemo from "../../component/avatar";
 import { styled } from "../../../theme/stitches";
+import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,14 +16,21 @@ interface LayoutProps {
 
 const navData = [
   {
+    id: 1,
     name: "Dashboard",
     path: "/",
     icon: <MdOutlineDashboard />,
   },
+  {
+    id: 2,
+    name: "Employee",
+    path: "/employee",
+    icon: <FaUser />,
+  },
 ];
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [click, setClick] = useState(false);
-
+  const [click, setClick] = useState<boolean>(false);
+  const [active, setActive] = useState<number>(1);
   return (
     <Flex>
       <StyledLayout variant={click ? "secondary" : "primary"}>
@@ -31,18 +40,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </StyledLogo>
           {navData?.map((item) => {
             return (
-              <StyledItem>
-                {item.icon}
-                {!click && (
-                  <div
-                    onClick={() => {
-                      // router.push(item.path);
-                    }}
-                  >
-                    {item.name}
-                  </div>
-                )}
-              </StyledItem>
+              <Link
+                to={item.path}
+                onClick={() => {
+                  setActive(item.id);
+                }}
+              >
+                <StyledItem variant={active === item.id && "active"}>
+                  {item.icon}
+                  {!click && <div>{item.name}</div>}
+                </StyledItem>
+              </Link>
             );
           })}
         </StyledDiv>
@@ -76,6 +84,14 @@ const StyledItem = styled("div", {
   gap: 10,
   cursor: "pointer",
   padding: 15,
+  variants: {
+    variant: {
+      active: {
+        background: "$primary",
+        color: "$white",
+      },
+    },
+  },
   "&:hover": {
     transform: "scale(0.95)",
   },
@@ -109,6 +125,10 @@ const Flex = styled("div", {
 
 const StyledDiv = styled("div", {
   width: "100%",
+  a: {
+    textDecoration: "none",
+    color: "$primary",
+  },
 });
 
 const StyledTopBar = styled("div", {

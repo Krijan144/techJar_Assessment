@@ -5,30 +5,28 @@ import FormikBase from "../../../ui/container/formik";
 import { Button } from "../../../ui/component/button";
 
 const validationSchema = Yup.object({
-  first_name: Yup.string().required("First Name is required"),
-  last_name: Yup.string().required("Last Name is required"),
+  firstname: Yup.string().required("First Name is required"),
+  lastname: Yup.string().required("Last Name is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  phone: Yup.number().required("Phone is required"),
-  password: Yup.string().required("Password is required"),
 });
 
-const EmployerForm = ({ onEdit, onCreate, formData }: any) => {
+const EmployeeForm = ({ onEdit, onCreate, formData }: any) => {
+  console.log(formData);
+
   const initialValues = formData
     ? {
-        first_name: formData.first_name,
-        last_name: formData.last_name,
+        id: formData.id,
+        firstname: formData.firstname,
+        lastname: formData.lastname,
         email: formData.email,
-        phone: formData.phone,
-        password: formData.password,
       }
     : {
-        first_name: "",
-        last_name: "",
+        id: Math.random(),
+        firstname: "",
+        lastname: "",
         email: "",
-        phone: "",
-        password: "",
       };
 
   return (
@@ -51,18 +49,18 @@ const EmployerForm = ({ onEdit, onCreate, formData }: any) => {
             <Form>
               <Input
                 label="First Name"
-                name="first_name"
-                value={values.first_name}
+                name="firstname"
+                value={values.firstname}
                 onChange={handleChange}
-                error={errors.first_name}
+                error={errors.firstname}
               />
 
               <Input
                 label="Last Name"
-                name="last_name"
-                value={values.last_name}
+                name="lastname"
+                value={values.lastname}
                 onChange={handleChange}
-                error={errors.last_name}
+                error={errors.lastname}
               />
 
               <Input
@@ -74,24 +72,7 @@ const EmployerForm = ({ onEdit, onCreate, formData }: any) => {
                 error={errors.email}
               />
 
-              <Input
-                label="Phone"
-                name="phone"
-                value={values.phone}
-                onChange={handleChange}
-                error={errors.phone}
-              />
-
-              <Input
-                label="Password"
-                name="password"
-                type="password"
-                value={values.password}
-                onChange={handleChange}
-                error={errors.password}
-              />
-
-              <Button label="Submit" type="submit" onClick={() => {}} />
+              <Button label="Submit" type="submit" />
             </Form>
           </>
         );
@@ -100,4 +81,4 @@ const EmployerForm = ({ onEdit, onCreate, formData }: any) => {
   );
 };
 
-export default EmployerForm;
+export default EmployeeForm;

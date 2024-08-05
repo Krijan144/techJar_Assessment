@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import DialogDemo from "../../..//ui/component/dialog";
-import Header from "../../..//ui/component/header";
+import DialogDemo from "../../../ui/component/dialog";
 import Dropdown from "../../../ui/component/select";
 
-import EmployerForm from "./form";
+import EmployeeForm from "./form";
 // import { Button } from "../../../component/button";
 // import { styled } from "../../../../theme/stitches";
 import Table from "../../../ui/container/table";
 import { styled } from "../../../theme/stitches";
 import { Button } from "../../../ui/component/button";
-import { employerData } from "../data";
+import { employeeData } from "../data";
 import { connect } from "react-redux";
 import { AppState } from "../../../store/reducer";
 import {
@@ -32,7 +31,7 @@ const actionData = [
   },
 ];
 
-const Employer = ({
+const Employee = ({
   isLoading,
   employees,
   fetchEmployees,
@@ -45,7 +44,7 @@ const Employer = ({
   const [dialogTitle, setDialogTitle] = useState<string>("");
 
   useEffect(() => {
-    fetchEmployees({ data: employerData });
+    fetchEmployees({ data: employeeData });
   }, []);
 
   return (
@@ -53,10 +52,10 @@ const Employer = ({
       <StyledMain>
         <Button
           customStyle={{ float: "right" }}
-          label="Create Employer"
+          label="Create Employee"
           onClick={() => {
             setSelectedData(undefined);
-            setDialogTitle("Create Employer");
+            setDialogTitle("Create Employee");
             setShow("form");
           }}
         ></Button>
@@ -68,20 +67,19 @@ const Employer = ({
           }}
         >
           {show === "form" && (
-            <EmployerForm
+            <EmployeeForm
               formData={selectedData}
-              onCreate={(e: any) => {
-                console.log(e);
-
-                createEmployee({ data: e });
+              onCreate={async (e: any) => {
+                await createEmployee({ data: e });
+                setShow("");
               }}
-              onEdit={(e: any) => {
-                updateEmployee({ data: e });
+              onEdit={async (e: any) => {
+                await updateEmployee({ data: e });
+                setShow("");
               }}
             />
           )}
 
-          {show === "view" && <>View</>}
           {show === "delete" && (
             <Flex>
               <Button
@@ -103,14 +101,16 @@ const Employer = ({
         </DialogDemo>
         {employees.length && (
           <Table
-            headers={["Email", "Status", "Action"]}
-            columnStyle={{ gridTemplateColumns: "2fr 1fr 1fr" }}
+            headers={["Email", "Firstname", "Lastname", "Action"]}
+            columnStyle={{ gridTemplateColumns: "2fr 1fr 1fr 1fr" }}
           >
             {employees.map((item: any) => {
               return (
                 <>
                   <StyledP>{item.email}</StyledP>
-                  <StyledP>{item.status}</StyledP>
+                  <StyledP>{item.firstname}</StyledP>
+                  <StyledP>{item.lastname}</StyledP>
+
                   <div>
                     <Dropdown
                       data={actionData}
@@ -122,12 +122,12 @@ const Employer = ({
                         setSelectedData(item);
 
                         if (e === "form") {
-                          setDialogTitle("Edit Employer");
+                          setDialogTitle("Edit Employee");
                         }
 
                         if (e === "delete") {
                           setDialogTitle(
-                            "Are you sure you want to delete this employer?"
+                            "Are you sure you want to delete this employee?"
                           );
                         }
                         setShow(e);
@@ -160,7 +160,7 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export default connector(Employer);
+export default connector(Employee);
 
 const StyledP = styled("span", {
   paddingTop: "1rem",

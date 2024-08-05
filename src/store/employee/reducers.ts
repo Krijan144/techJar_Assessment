@@ -26,7 +26,7 @@ export const initialState: EmployeeState = {
   searchedEmployees: [],
 };
 
-const reducer: Reducer<EmployeeState> = (
+const reducer = (
   state: EmployeeState = initialState,
   action: EmployeeActionTypes
 ): EmployeeState => {

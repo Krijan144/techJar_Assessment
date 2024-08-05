@@ -9,7 +9,7 @@ interface DialogProp {
   children?: any;
   dialogTrigger?: any;
   open?: boolean;
-  onClose?: () => {};
+  onClose?: ()=>void;
 }
 const DialogDemo = ({
   title,

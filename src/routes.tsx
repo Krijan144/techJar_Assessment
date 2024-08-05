@@ -1,6 +1,6 @@
 import { Login } from "./page/login";
 import Dashboard from "./page/dashboard";
-import Employer from "./page/dashboard/employer";
+import Employee from "./page/dashboard/employee";
 
 export const authRoutes = [
   {
@@ -20,10 +20,10 @@ export const routes = [
     protected: true,
   },
   {
-    title: "Employer",
+    title: "Employee",
     bodyConfig: { use: false, title: false },
-    path: "/employer",
-    component: <Employer />,
+    path: "/employee",
+    component: <Employee />,
     protected: true,
   },
 ];

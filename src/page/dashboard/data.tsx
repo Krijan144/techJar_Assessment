@@ -57,18 +57,16 @@ export const cardData: cardType[] = [
   },
 ];
 
-export const employerData = [
+export const employeeData = [
   {
     id: 1,
     email: "johnDoe@gmail.com",
-    status: "active",
     firstname: "John",
     lastname: "Doe",
   },
   {
     id: 2,
     email: "johnDuck@gmail.com",
-    status: "active",
     firstname: "John",
     lastname: "Doe",
   },
