@@ -39,14 +39,23 @@ const StyledDiv = styled("div", {
   marginRight: "1rem",
   marginBottom: "1rem",
   width: "8rem",
+  "@sm2": {
+    width: "5rem",
+  },
 });
 
 const StyledNumber = styled("div", {
   fontSize: "$large",
   padding: "0.5rem 0 0.5rem 0",
+  "@sm2": {
+    fontSize: "12px",
+  },
 });
 const StyledText = styled("p", {
   fontSize: "16px",
+  "@sm2": {
+    fontSize: "12px",
+  },
 });
 
 const StyledIcon = styled("div", {
@@ -55,5 +64,8 @@ const StyledIcon = styled("div", {
     fill: "$white",
     padding: "0.5rem",
     borderRadius: "50%",
+    "@sm2": {
+      fontSize: "1rem",
+    },
   },
 });

@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Bar } from "react-chartjs-2";
 import { styled } from "../../../../theme/stitches";
 import Header from "../../header";
@@ -16,6 +15,7 @@ const Bars = ({ name, label, datas }) => {
       },
     ],
   };
+
   const options = {
     maintainAspectRatio: true,
     layout: {
@@ -27,6 +27,7 @@ const Bars = ({ name, label, datas }) => {
       },
     },
   };
+
   return (
     <>
       <Chartss>
@@ -39,7 +40,7 @@ const Bars = ({ name, label, datas }) => {
 
 export default Bars;
 
-//styling
+// Styling with mobile responsiveness
 export const Chartss = styled("div", {
   position: "relative",
   color: "white",
@@ -52,4 +53,14 @@ export const Chartss = styled("div", {
     borderRadius: 7,
   },
   overflowX: "auto",
+
+  "@md": {
+    width: "24rem",
+    padding: "1rem",
+    boxShadow: "rgba(99, 99, 99, 0.15) 0px 1px 6px 0",
+  },
+  "@media (max-width: 512px)": {
+    // width: "100%",
+    overflowX: "auto",
+  },
 });

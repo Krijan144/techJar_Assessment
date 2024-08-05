@@ -4,7 +4,8 @@ export const { styled, getCssText, keyframes, globalCss }: any = createStitches(
   {
     media: {
       xs: "(min-width: 320px)",
-      sm: "(min-width: 375px)",
+      sm: "(min-width: 475px)",
+      sm2: "(max-width: 475px)",
       md: "(max-width: 1080px)",
       md2: "(min-width: 1080px)",
       lg: "(min-width: 1200px)",

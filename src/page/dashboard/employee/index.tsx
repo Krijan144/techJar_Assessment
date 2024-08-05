@@ -118,15 +118,14 @@ const Employee = ({
         </DialogDemo>
         {employees.length && (
           <Table
-            headers={["Email", "Firstname", "Lastname", "Action"]}
-            columnStyle={{ gridTemplateColumns: "2fr 1fr 1fr 1fr" }}
+            headers={["Email", "Firstname", "Action"]}
+            columnStyle={{ gridTemplateColumns: "2fr 1fr  1fr" }}
           >
             {employees.map((item: any) => {
               return (
                 <>
                   <StyledP>{item.email}</StyledP>
                   <StyledP>{item.firstname}</StyledP>
-                  <StyledP>{item.lastname}</StyledP>
 
                   <div>
                     <Dropdown

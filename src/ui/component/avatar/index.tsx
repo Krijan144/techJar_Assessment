@@ -26,7 +26,15 @@ const AvatarDemo = ({
   const name = fallbackText && shortName(fallbackText);
   return (
     <>
-      <Flex css={{ gap: 20 }}>
+      <Flex
+        css={{
+          gap: 20,
+          alignItems: "center",
+          justifyContent: "flex-end",
+          width: "100%",
+        }}
+      >
+        <div>Welcome, John Doe</div>
         <Tooltip
           content={
             <AvatarRoot variant={variant}>
@@ -41,11 +49,21 @@ const AvatarDemo = ({
             </AvatarRoot>
           }
           label={
-            allUsers.length
-              ? allUsers.map((item: any) => {
-                  return <p>{item}</p>;
-                })
-              : fallbackText
+            <>
+              {allUsers.length
+                ? allUsers.map((item: any) => {
+                    return <p>{item}</p>;
+                  })
+                : fallbackText}
+              <StyledP
+                onClick={() => {
+                  sessionStorage.setItem("token", "");
+                  window.location.href = "/";
+                }}
+              >
+                Logout
+              </StyledP>
+            </>
           }
         />
       </Flex>
@@ -53,6 +71,12 @@ const AvatarDemo = ({
   );
 };
 
+const StyledP = styled("div", {
+  borderTop: "1px dotted black",
+  marginTop: "1rem",
+  cursor: "pointer",
+  paddingTop: "0.5rem",
+});
 const AvatarRoot = styled(AvatarPrimitive.Root, {
   display: "inline-flex",
   alignItems: "center",

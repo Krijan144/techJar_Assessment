@@ -38,6 +38,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <StyledLogo variant={click ? "mobile" : "web"} alt="">
             <img src={click ? LogoMob : Logo} />
           </StyledLogo>
+          <StyledMLogo alt="">
+            <img src={LogoMob} />
+          </StyledMLogo>
           {navData?.map((item) => {
             return (
               <Link
@@ -48,7 +51,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 <StyledItem variant={active === item.id && "active"}>
                   {item.icon}
-                  {!click && <div>{item.name}</div>}
+                  {!click && <StyledN>{item.name}</StyledN>}
                 </StyledItem>
               </Link>
             );
@@ -57,7 +60,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </StyledLayout>
       <StyledParent>
         <StyledTopBar>
-          <img
+          <StyledHburger
             onClick={() => {
               setClick(!click);
             }}
@@ -76,7 +79,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 };
 
 // Styling
-
+const StyledN = styled("div", {
+  "@sm2": {
+    display: "none",
+  },
+});
+const StyledHburger = styled("img", {
+  "@sm2": {
+    display: "none",
+  },
+});
 const StyledItem = styled("div", {
   display: "flex",
   alignItems: "center",
@@ -112,6 +124,24 @@ export const StyledLogo = styled("div", {
         width: 120,
       },
     },
+  },
+  "@sm2": {
+    display: "none",
+  },
+});
+export const StyledMLogo = styled("div", {
+  width: 25,
+  objectFit: "contain",
+  padding: "18px 0 15px 15px",
+  img: {
+    width: "100%",
+  },
+
+  "@sm": {
+    display: "none",
+  },
+  "@sm2": {
+    display: "block",
   },
 });
 
@@ -158,10 +188,14 @@ const StyledLayout = styled("div", {
     transition: "0.3s ease-in",
     cursor: "pointer",
   },
+
   variants: {
     variant: {
       primary: {
         width: "20rem",
+        "@sm2": {
+          width: "4rem",
+        },
       },
       secondary: {
         width: "4rem",

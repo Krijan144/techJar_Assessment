@@ -55,6 +55,10 @@ const StyledButton = styled("button", {
   backgroundColor: "$primary",
   transition: "0.2s ease-in-out",
   "&:hover": { scale: "0.9" },
+  "@sm2": {
+    fontSize: "12px",
+    padding: "0 5px",
+  },
   variants: {
     variant: {
       primary: {

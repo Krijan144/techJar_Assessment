@@ -28,6 +28,10 @@ const StyledData = styled("div", {
 const StyledTable = styled("div", {
   padding: "1rem",
   borderRadius: 10,
+  "@sm2": {
+    padding: "0.5rem",
+    fontSize: "12px",
+  },
 });
 const Headers = styled("div", {
   width: "100%",
@@ -38,4 +42,7 @@ const Headers = styled("div", {
 });
 const Header = styled("h4", {
   color: "#A1A5B7",
+  "@sm2": {
+    fontSize: "14px",
+  },
 });
