@@ -5,7 +5,6 @@ import { Button } from "../../component/button";
 import { Input } from "../../component/input";
 import FormikBase from "../formik";
 
-
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
@@ -13,7 +12,7 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
-const LoginForm = ({ onCreate, handleSubmit }: any) => {
+const LoginForm = ({ onCreate, handleSubmit, isLoading }: any) => {
   const initialValues = {
     email: "",
     password: "",
@@ -58,11 +57,10 @@ const LoginForm = ({ onCreate, handleSubmit }: any) => {
               />
               <br />
               <Button
+                isLoading={isLoading}
                 label="Log In"
                 type="submit"
-                customStyle={{ width: "24rem" }}
-                variant="white"
-                onClick={() => {}}
+                customStyle={{ width: "94%" }}
               />
             </Form>
           </>

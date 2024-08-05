@@ -96,7 +96,7 @@ const StyledItem = styled("div", {
     transform: "scale(0.95)",
   },
 });
-const StyledLogo = styled("div", {
+export const StyledLogo = styled("div", {
   width: 100,
   objectFit: "contain",
   padding: "18px 0 15px 15px",

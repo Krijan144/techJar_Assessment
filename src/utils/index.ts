@@ -4,7 +4,7 @@ export const shortName = (name: string) => {
   return firstLetters?.join("");
 };
 
-export const updateData = (data: [], action: any) => {
+export const updateData = (data: any, action: any) => {
   // Find the index of the employee with the matching _id
   const index = data.findIndex((item: any) => item.id === action.payload.id);
   if (index !== -1) {

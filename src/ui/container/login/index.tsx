@@ -1,30 +1,57 @@
-import React, { useState } from "react";
 import LoginForm from "./form";
 import { connect } from "react-redux";
-
-import { styled } from "@stitches/react";
-import Header from "../../component/header";
+import Logo from "../../../../assets/logo.png";
 import { login } from "../../../store/app/actions";
 import { AppState } from "../../../store/reducer";
+import Info from "../../component/info";
+import { Icon } from "../../component/card";
+import { AiFillDollarCircle } from "react-icons/ai";
+import { MdSell } from "react-icons/md";
+import { HiMiniSquare3Stack3D } from "react-icons/hi2";
+import { MdOutlineShowChart } from "react-icons/md";
+import { styled, keyframes } from "../../../theme/stitches";
 
-const Login = ({ isLoading, login }) => {
+type LoginType = {
+  isLoading: boolean;
+  login: ({}) => void;
+};
+
+const Login = ({ isLoading, login }: LoginType) => {
   return (
     <>
       <StyledLogin>
         <StyledWrapper>
           <StyledHeader>
-            {/* <Image src={Logo.src} width={200} height={100} alt="" /> */}
-            <Header label="Sign In to Tech Jar" />
+            <StyledLogo>
+              <img src={Logo} alt="" />
+            </StyledLogo>
+            <Info />
           </StyledHeader>
 
           <LoginForm
+            isLoading={isLoading}
             onCreate={(values: any) => {
-              console.log(values);
-
               login({ values });
-              // handleSubmit(e);
             }}
           />
+          <StyledFlex>
+            <Icon
+              icon={<AiFillDollarCircle />}
+              iconBg="$primary"
+              size="2.5rem"
+            />
+            <Icon icon={<MdSell />} iconBg="$primary" size="2.5rem" />
+            <Icon
+              icon={<MdOutlineShowChart />}
+              iconBg="$primary"
+              size="2.5rem"
+            />
+            <Icon
+              icon={<HiMiniSquare3Stack3D />}
+              iconBg="$primary"
+              size="2.5rem"
+            />
+          </StyledFlex>
         </StyledWrapper>
       </StyledLogin>
     </>
@@ -48,25 +75,40 @@ const StyledHeader = styled("div", {
   padding: "2rem",
   textAlign: "center",
 });
+
 const StyledLogin = styled("div", {
-  // height: "100vh",
   padding: "4rem",
-  // width: "100%",
-  // background: "$primary",
   position: "relative",
-  // backgroundImage: `url('${Logo2.src}')`,
-  // backgroundSize: "contain",
-  // backgroundRepeat: "no-repeat",
-  // backgroundPositionY: "bottom",
+  height: "calc(100vh - 128px)",
+  overflow: "hidden",
+  background: "#f2f2f2",
 });
 const StyledWrapper = styled("div", {
   padding: "2rem",
   width: "30rem",
   position: "absolute",
-  // background: "$primary",
+  borderRadius: "4px",
   left: "50%",
   right: "50%",
-  top: "-30%",
-  borderRadius: "4px",
+  top: "-5rem",
   transform: "translate(-50%,50%)",
+  background: "$white",
+  boxShadow: "rgba(0, 140, 130, 0.4) 0px 30px 90px",
+});
+const StyledLogo = styled("div", {
+  width: "100%",
+  objectFit: "contain",
+  alignItems: "center",
+  img: {
+    width: 200,
+  },
+});
+
+const StyledFlex = styled("div", {
+  display: "flex",
+  columnGap: "1rem",
+  marginTop: "6rem",
+  position: "absolute",
+  width: "inherit",
+  justifyContent: "center",
 });

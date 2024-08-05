@@ -149,6 +149,3 @@ export const deleteEmployee =
       return false;
     }
   };
-// export const updateEmployee = ({ employeeId, values }) => {};
-
-// export const deleteEmployee = ({ employeeId }) => {};

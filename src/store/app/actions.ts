@@ -22,7 +22,7 @@ export type AppThunk = ActionCreator<
   ThunkAction<Promise<boolean>, ApplicationState, null, Action<string>>
 >;
 
-export const setMe = (payload): SetMeType => ({
+export const setMe = (payload: any): SetMeType => ({
   type: SET_ME,
   payload,
 });
@@ -49,8 +49,8 @@ export const setErrorMessage = (err: {
   return {
     type: SET_NOTIFICATION_DATA,
     payload: {
-      name: (err && err.response && err.response.name) || "Error",
-      message: "Error has occurred",
+      name: "Error",
+      message: err?.error || "Error has occurred",
       level: "error",
     },
   };
@@ -58,36 +58,10 @@ export const setErrorMessage = (err: {
 
 export const logout = () => {
   sessionStorage.removeItem("token");
-  window.localStorage.setItem("logout", Date.now().toString());
-
-  // window.location.href = '/login';
 };
-
-// export const fetchMe: AppThunk =
-//   () =>
-//   async (dispatch: Dispatch): Promise<boolean> => {
-//     try {
-//       dispatch(setIsLoading(true));
-
-//       const { data, status } = await network({ dispatch }).get(api.me);
-//       if (status === 200) {
-//         if (data) {
-//           dispatch(setMe({ ...data }));
-//           dispatch(setIsLoading(false));
-//         }
-//         return true;
-//       }
-//       return false;
-//     } catch (error) {
-//       dispatch(setErrorMessage(error));
-//       return false;
-//     }
-//   };
 
 export const login = ({ values }: any) => {
   return async (dispatch: Dispatch) => {
-    console.log(values, "innn");
-
     try {
       dispatch(setIsLoading(true));
 
@@ -108,23 +82,16 @@ export const login = ({ values }: any) => {
           dispatch(
             setNotification({
               name: "Login",
-              message: data.message,
+              message: "Login Successful",
               level: "success",
             })
           );
           return true;
         }
         dispatch(setIsLoading(false));
-        dispatch(
-          setNotification({
-            name: "Error",
-            message: data,
-            level: "error",
-          })
-        );
       }
-    } catch (error) {
-      error.response && dispatch(setErrorMessage(error));
+    } catch (error: any) {
+      error.response && dispatch(setErrorMessage(error.response.data));
       dispatch(setIsLoading(false));
     }
   };

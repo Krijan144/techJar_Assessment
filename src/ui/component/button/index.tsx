@@ -1,5 +1,6 @@
 import React from "react";
 import { styled } from "../../../theme/stitches";
+import { Loader } from "../loader";
 
 type ButtonType = "button" | "reset" | "submit";
 
@@ -10,6 +11,7 @@ interface ButtonProps {
   icon?: JSX.Element;
   customStyle?: any;
   type?: ButtonType; // Use the ButtonType type
+  isLoading?: boolean;
 }
 
 export const Button = ({
@@ -19,6 +21,7 @@ export const Button = ({
   customStyle,
   onClick,
   type = "button",
+  isLoading = false,
 }: ButtonProps) => {
   return (
     <>
@@ -26,9 +29,10 @@ export const Button = ({
         variant={variant}
         css={customStyle}
         type={type}
+        disabled={isLoading}
         onClick={() => onClick()}
       >
-        {label}
+        {!isLoading ? label : <Loader />}
         {icon && icon}
       </StyledButton>
     </>

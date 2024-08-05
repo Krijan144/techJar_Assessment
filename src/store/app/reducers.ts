@@ -1,15 +1,15 @@
-import { Reducer } from 'redux';
+import { Reducer } from "redux";
 
 import {
   RESET_NOTIFICATION_DATA,
   SET_IS_LOADING,
   SET_ME,
   SET_NOTIFICATION_DATA,
-} from './action-types';
-import { ApplicationActionTypes, ApplicationState } from './types';
+} from "./action-types";
+import { ApplicationActionTypes, ApplicationState } from "./types";
 
 export const initialState: ApplicationState = {
-  token: '',
+  token: "",
   isLoading: false,
   notification: [],
   me: undefined,
@@ -17,7 +17,7 @@ export const initialState: ApplicationState = {
 
 const reducer: Reducer<ApplicationState> = (
   state: ApplicationState = initialState,
-  action: ApplicationActionTypes,
+  action: ApplicationActionTypes
 ): ApplicationState => {
   const { notification } = state;
 
@@ -28,11 +28,11 @@ const reducer: Reducer<ApplicationState> = (
         isLoading: action.payload,
       };
     }
-   
+
     case SET_NOTIFICATION_DATA: {
       return {
         ...state,
-        notification: [...notification, action.payload],
+        notification: [action.payload],
         isLoading: false,
       };
     }
@@ -46,7 +46,7 @@ const reducer: Reducer<ApplicationState> = (
     case SET_ME: {
       return { ...state, me: action.payload };
     }
-  
+
     default:
       return state;
   }

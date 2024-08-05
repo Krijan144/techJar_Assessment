@@ -8,7 +8,7 @@ export const authRoutes = [
     bodyConfig: { use: false, title: false },
     path: "/login",
     component: <Login />,
-    protected: true,
+    protected: false,
   },
 ];
 export const routes = [
@@ -24,6 +24,6 @@ export const routes = [
     bodyConfig: { use: false, title: false },
     path: "/employee",
     component: <Employee />,
-    protected: true,
+    protected: false,
   },
 ];

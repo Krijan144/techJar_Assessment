@@ -17,6 +17,7 @@ import {
   fetchEmployees,
   updateEmployee,
 } from "../../../store/employee/actions";
+import { setNotification } from "../../../store/app/actions";
 
 const actionData = [
   {
@@ -38,6 +39,7 @@ const Employee = ({
   createEmployee,
   deleteEmployee,
   updateEmployee,
+  setNotification,
 }: any) => {
   const [show, setShow] = useState<string>("");
   const [selectedData, setSelectedData] = useState();
@@ -71,10 +73,20 @@ const Employee = ({
               formData={selectedData}
               onCreate={async (e: any) => {
                 await createEmployee({ data: e });
+                setNotification({
+                  name: "create",
+                  message: "Employee Created Successfully!",
+                  level: "success",
+                });
                 setShow("");
               }}
               onEdit={async (e: any) => {
                 await updateEmployee({ data: e });
+                setNotification({
+                  name: "update",
+                  message: "Employee Updated Successfully!",
+                  level: "success",
+                });
                 setShow("");
               }}
             />
@@ -87,6 +99,11 @@ const Employee = ({
                 variant="secondary"
                 onClick={() => {
                   deleteEmployee({ data: selectedData.id });
+                  setNotification({
+                    name: "delete",
+                    message: "Employee Deleted Successfully!",
+                    level: "success",
+                  });
                   setShow("");
                 }}
               ></Button>
@@ -156,6 +173,7 @@ const mapDispatchToProps = {
   createEmployee,
   deleteEmployee,
   updateEmployee,
+  setNotification,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

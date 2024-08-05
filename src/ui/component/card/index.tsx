@@ -7,7 +7,12 @@ interface CardProps {
   text: string;
   iconBg: string;
 }
-
+interface IconProps {
+  icon: React.ReactNode;
+  iconBg: string;
+  size: string;
+  css?: any;
+}
 const Card = ({ color, icon, number, text, iconBg }: CardProps) => {
   return (
     <StyledDiv css={{ background: color }}>
@@ -19,6 +24,14 @@ const Card = ({ color, icon, number, text, iconBg }: CardProps) => {
 };
 
 export default Card;
+
+export const Icon = ({ icon, iconBg, size, css }: IconProps) => {
+  return (
+    <StyledIcon css={{ svg: { background: iconBg, fontSize: size }, ...css }}>
+      {icon}
+    </StyledIcon>
+  );
+};
 
 const StyledDiv = styled("div", {
   padding: "1rem",
