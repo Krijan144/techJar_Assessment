@@ -31,7 +31,19 @@ const actionData = [
     value: "delete",
   },
 ];
-
+interface EmployeeType {
+  isLoading: boolean;
+  employees: Array<{ email: string; firstname: string; id: string }>;
+  fetchEmployees: (data: any) => void;
+  createEmployee: (data: any) => void;
+  deleteEmployee: (data: any) => void;
+  updateEmployee: (data: any) => void;
+  setNotification: (notification: {
+    name: string;
+    message: string;
+    level: string;
+  }) => void;
+}
 const Employee = ({
   isLoading,
   employees,
@@ -40,7 +52,7 @@ const Employee = ({
   deleteEmployee,
   updateEmployee,
   setNotification,
-}: any) => {
+}: EmployeeType) => {
   const [show, setShow] = useState<string>("");
   const [selectedData, setSelectedData] = useState();
   const [dialogTitle, setDialogTitle] = useState<string>("");
@@ -61,99 +73,105 @@ const Employee = ({
             setShow("form");
           }}
         ></Button>
-        <DialogDemo
-          open={show ? true : false}
-          title={dialogTitle}
-          onClose={() => {
-            setShow("");
-          }}
-        >
-          {show === "form" && (
-            <EmployeeForm
-              formData={selectedData}
-              onCreate={async (e: any) => {
-                await createEmployee({ data: e });
-                setNotification({
-                  name: "create",
-                  message: "Employee Created Successfully!",
-                  level: "success",
-                });
+        {isLoading ? (
+          <></>
+        ) : (
+          <>
+            <DialogDemo
+              open={show ? true : false}
+              title={dialogTitle}
+              onClose={() => {
                 setShow("");
               }}
-              onEdit={async (e: any) => {
-                await updateEmployee({ data: e });
-                setNotification({
-                  name: "update",
-                  message: "Employee Updated Successfully!",
-                  level: "success",
-                });
-                setShow("");
-              }}
-            />
-          )}
+            >
+              {show === "form" && (
+                <EmployeeForm
+                  formData={selectedData}
+                  onCreate={async (e: any) => {
+                    await createEmployee({ data: e });
+                    setNotification({
+                      name: "create",
+                      message: "Employee Created Successfully!",
+                      level: "success",
+                    });
+                    setShow("");
+                  }}
+                  onEdit={async (e: any) => {
+                    await updateEmployee({ data: e });
+                    setNotification({
+                      name: "update",
+                      message: "Employee Updated Successfully!",
+                      level: "success",
+                    });
+                    setShow("");
+                  }}
+                />
+              )}
 
-          {show === "delete" && (
-            <Flex>
-              <Button
-                label="Yes"
-                variant="secondary"
-                onClick={() => {
-                  deleteEmployee({ data: selectedData.id });
-                  setNotification({
-                    name: "delete",
-                    message: "Employee Deleted Successfully!",
-                    level: "success",
-                  });
-                  setShow("");
-                }}
-              ></Button>
-              <Button
-                label="No"
-                onClick={() => {
-                  setShow("");
-                }}
-              ></Button>
-            </Flex>
-          )}
-        </DialogDemo>
-        {employees.length && (
-          <Table
-            headers={["Email", "Firstname", "Action"]}
-            columnStyle={{ gridTemplateColumns: "2fr 1fr  1fr" }}
-          >
-            {employees.map((item: any) => {
-              return (
-                <>
-                  <StyledP>{item.email}</StyledP>
-                  <StyledP>{item.firstname}</StyledP>
+              {show === "delete" && (
+                <Flex>
+                  <Button
+                    label="Yes"
+                    variant="secondary"
+                    onClick={() => {
+                      deleteEmployee({ data: selectedData.id });
+                      setNotification({
+                        name: "delete",
+                        message: "Employee Deleted Successfully!",
+                        level: "success",
+                      });
+                      setShow("");
+                    }}
+                  ></Button>
+                  <Button
+                    label="No"
+                    onClick={() => {
+                      setShow("");
+                    }}
+                  ></Button>
+                </Flex>
+              )}
+            </DialogDemo>
+            {employees.length && (
+              <Table
+                headers={["Email", "Firstname", "Action"]}
+                columnStyle={{ gridTemplateColumns: "2fr 1fr  1fr" }}
+              >
+                {employees.map((item: any) => {
+                  return (
+                    <>
+                      <StyledP>{item.email}</StyledP>
+                      <StyledP>{item.firstname}</StyledP>
 
-                  <div>
-                    <Dropdown
-                      data={actionData}
-                      name="action"
-                      labelShow={false}
-                      label={"Select Action"}
-                      changeText={false}
-                      handleChange={(e) => {
-                        setSelectedData(item);
+                      <div>
+                        <Dropdown
+                          data={actionData}
+                          name="action"
+                          labelShow={false}
+                          label={"Select Action"}
+                          changeText={false}
+                          handleChange={(e: any) => {
+                            setSelectedData(item);
 
-                        if (e === "form") {
-                          setDialogTitle("Edit Employee");
-                        }
+                            if (e === "form") {
+                              setDialogTitle("Edit Employee");
+                            }
 
-                        if (e === "delete") {
-                          setDialogTitle(
-                            "Are you sure you want to delete this employee?"
-                          );
-                        }
-                        setShow(e);
-                      }}
-                    />
-                  </div>
-                </>
-              );
-            })}
-          </Table>
+                            if (e === "delete") {
+                              setDialogTitle(
+                                "Are you sure you want to delete this employee?"
+                              );
+                            }
+                            setShow(e);
+                          }}
+                        />
+                      </div>
+                    </>
+                  );
+                })}
+              </Table>
+            )}
+          </>
         )}
       </StyledMain>
     </>

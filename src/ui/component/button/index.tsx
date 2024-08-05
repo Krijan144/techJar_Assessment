@@ -32,7 +32,11 @@ export const Button = ({
         disabled={isLoading}
         onClick={() => onClick()}
       >
-        {!isLoading ? label : <Loader />}
+        {!isLoading ? (
+          label
+        ) : (
+          <Loader customStyle={{ color: "white", fontSize: 18 }} />
+        )}
         {icon && icon}
       </StyledButton>
     </>

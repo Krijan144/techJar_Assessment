@@ -83,6 +83,10 @@ const TextBox = styled("div", {
   marginTop: "1rem",
   marginLeft: "2rem",
   textAlign: "",
+  "@sm2": {
+    fontSize: "14px",
+    marginLeft: "1rem",
+  },
   "& div": {
     position: "absolute",
     top: "-40px",
@@ -92,6 +96,9 @@ const TextBox = styled("div", {
     width: "100%",
     color: "$primaryColor",
     animationTimingFunction: "ease",
+    "@sm2": {
+      fontSize: "14px",
+    },
   },
 
   "& div:nth-child(1)": {

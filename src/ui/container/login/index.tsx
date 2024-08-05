@@ -35,22 +35,10 @@ const Login = ({ isLoading, login }: LoginType) => {
             }}
           />
           <StyledFlex>
-            <Icon
-              icon={<AiFillDollarCircle />}
-              iconBg="$primary"
-              size="2.5rem"
-            />
-            <Icon icon={<MdSell />} iconBg="$primary" size="2.5rem" />
-            <Icon
-              icon={<MdOutlineShowChart />}
-              iconBg="$primary"
-              size="2.5rem"
-            />
-            <Icon
-              icon={<HiMiniSquare3Stack3D />}
-              iconBg="$primary"
-              size="2.5rem"
-            />
+            <Icon icon={<AiFillDollarCircle />} iconBg="$primary" />
+            <Icon icon={<MdSell />} iconBg="$primary" />
+            <Icon icon={<MdOutlineShowChart />} iconBg="$primary" />
+            <Icon icon={<HiMiniSquare3Stack3D />} iconBg="$primary" />
           </StyledFlex>
         </StyledWrapper>
       </StyledLogin>
@@ -74,6 +62,9 @@ export default connector(Login);
 const StyledHeader = styled("div", {
   padding: "2rem",
   textAlign: "center",
+  "@sm2": {
+    padding: "1rem",
+  },
 });
 
 const StyledLogin = styled("div", {
@@ -85,7 +76,8 @@ const StyledLogin = styled("div", {
 });
 const StyledWrapper = styled("div", {
   padding: "2rem",
-  width: "30rem",
+  maxWidth: "30rem",
+  width: "70%",
   position: "absolute",
   borderRadius: "4px",
   left: "50%",
@@ -94,6 +86,9 @@ const StyledWrapper = styled("div", {
   transform: "translate(-50%,50%)",
   background: "$white",
   boxShadow: "rgba(0, 140, 130, 0.4) 0px 30px 90px",
+  "@sm2": {
+    top: "5%",
+  },
 });
 const StyledLogo = styled("div", {
   width: "100%",
@@ -101,6 +96,9 @@ const StyledLogo = styled("div", {
   alignItems: "center",
   img: {
     width: 200,
+    "@sm2": {
+      width: 100,
+    },
   },
 });
 

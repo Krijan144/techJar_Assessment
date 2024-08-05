@@ -20,7 +20,7 @@ interface SelectProp {
   label?: string;
   name?: string;
   labelShow?: boolean;
-  handleChange?: () => void;
+  handleChange?: any;
   changeText?: boolean;
 }
 export const Dropdown = ({

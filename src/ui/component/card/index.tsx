@@ -10,7 +10,6 @@ interface CardProps {
 interface IconProps {
   icon: React.ReactNode;
   iconBg: string;
-  size: string;
   css?: any;
 }
 const Card = ({ color, icon, number, text, iconBg }: CardProps) => {
@@ -25,9 +24,9 @@ const Card = ({ color, icon, number, text, iconBg }: CardProps) => {
 
 export default Card;
 
-export const Icon = ({ icon, iconBg, size, css }: IconProps) => {
+export const Icon = ({ icon, iconBg, css }: IconProps) => {
   return (
-    <StyledIcon css={{ svg: { background: iconBg, fontSize: size }, ...css }}>
+    <StyledIcon variant="lg" css={{ svg: { background: iconBg }, ...css }}>
       {icon}
     </StyledIcon>
   );
@@ -59,6 +58,18 @@ const StyledText = styled("p", {
 });
 
 const StyledIcon = styled("div", {
+  variants: {
+    variant: {
+      lg: {
+        svg: {
+          fontSize: "2.5rem",
+          "@sm2": {
+            fontSize: "1.5rem",
+          },
+        },
+      },
+    },
+  },
   svg: {
     fontSize: "1.5rem",
     fill: "$white",
